@@ -89,6 +89,16 @@ static UINT32 WinDivertDivTen128(UINT32 *a);
 
 #define IPPROTO_MH      135
 
+#ifdef _MSC_VER
+
+#define WINDIVERT_INLINE    __forceinline
+
+#else       /* _MSC_VER */
+
+#define WINDIVERT_INLINE    __attribute__((__always_inline__)) inline
+
+#endif      /* _MSC_VER */
+
 /*
  * Filter interpreter config.
  */
