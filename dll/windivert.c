@@ -89,36 +89,6 @@ static UINT32 WinDivertDivTen128(UINT32 *a);
 
 #define IPPROTO_MH      135
 
-#ifdef _MSC_VER
-
-#pragma intrinsic(memcpy)
-#pragma function(memcpy)
-void *memcpy(void *dst, const void *src, size_t n)
-{
-    size_t i;
-    for (i = 0; i < n; i++)
-        ((UINT8 *)dst)[i] = ((const UINT8 *)src)[i];
-    return dst;
-}
-
-#pragma intrinsic(memset)
-#pragma function(memset)
-void *memset(void *dst, int c, size_t n)
-{
-    size_t i;
-    for (i = 0; i < n; i++)
-        ((UINT8 *)dst)[i] = (UINT8)c;
-    return dst;
-}
-
-#define WINDIVERT_INLINE    __forceinline
-
-#else       /* _MSC_VER */
-
-#define WINDIVERT_INLINE    __attribute__((__always_inline__)) inline
-
-#endif      /* _MSC_VER */
-
 /*
  * Filter interpreter config.
  */
